@@ -20,7 +20,7 @@ const parseOBJ = (stream, cb) => {
                 throw new Error(`parse-obj: Invalid vertex : ${line}`);
               }
 
-              vertexPositions.push([Number(toks[1]), Number(toks[2]), Number(toks[3])]);
+              vertexPositions.push(Number(toks[1]), Number(toks[2]), Number(toks[3]));
               break;
           }
 
@@ -29,7 +29,7 @@ const parseOBJ = (stream, cb) => {
                 throw new Error(`parse-obj: Invalid vertex normal: ${line}`);
               }
 
-              vertexNormals.push([Number(toks[1]), Number(toks[2]), Number(toks[3])]);
+              vertexNormals.push(Number(toks[1]), Number(toks[2]), Number(toks[3]));
               break;
           }
 
@@ -38,7 +38,7 @@ const parseOBJ = (stream, cb) => {
                 throw new Error(`parse-obj: Invalid vertex texture coord: ${line}`);
               }
 
-              vertexTexture.push([Number(toks[1]), Number(toks[2])]);
+              vertexTexture.push(Number(toks[1]), Number(toks[2]));
               break;
           }
 
