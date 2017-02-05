@@ -1,8 +1,8 @@
-const fs = require("fs")
-const { parseOBJ } = require("./parser.js")
+const fs = require('fs')
+const { parseOBJ } = require('./parser.js')
 
 const parseObjFile = () => {
-    parseOBJ(fs.createReadStream("model.obj"), function(err, result) {
+    parseOBJ(fs.createReadStream('model.obj'), function(err, result) {
       if(err) {
         throw new Error("Error parsing OBJ file: " + err)
       }

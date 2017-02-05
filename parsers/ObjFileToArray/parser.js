@@ -1,4 +1,4 @@
-const split = require("split")
+const split = require('split')
 
 const parseOBJ = (stream, cb) => {
   const vertexPositions = [];
