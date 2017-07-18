@@ -1,6 +1,11 @@
 const { CHUNK_NAMES } = require('./enums/chunkNames.js');
-const { CHUNK_PARSERS } = require('./enums/chunkParsers.js');
-const { NON_LEAF_CHUNKS } = require('./enums/nonLeafChunks.js');
+const { NON_LEAF_CHUNKS } = require('./enums/nonLeafChunk.js');
+const CHUNK_PARSERS = {
+  0x4000: parseObjectChunk,
+  0x4110: parseVertexListChunk,
+  0x4120: parseFaceListChunk,
+  0xA000: parseMaterialNameChunk
+};
 
 let encoding;
 
@@ -63,7 +68,7 @@ function parseObjectChunk(buf) {
 
 
 function parseChildren(buf) {
-  const offset = 0;
+  let offset = 0;
   const children = [];
 
   while(offset < buf.length) {
