@@ -114,6 +114,8 @@ function parseChunk(buf, offset) {
 
 
 function getChildChunk(tree, id) {
+  const chunks = getChildrenChunks(tree, id);
+
   return chunks.length > 0
     ? getChildrenChunks(tree, id)[0]
     : null;
@@ -186,7 +188,7 @@ const parse3ds = (buf, opts) => {
   return result;
 };
 
-const get3TypeChunks = (objectChunk) => {
+const get3TypeChunks = (objectChunks) => {
   const triangularMesh = 0x4100;
   const vertexList = 0x4110;
   const faceList = 0x4120;
