@@ -158,9 +158,6 @@ function unpackFaces(buf) {
 }
 
 const parse3ds = (buf, opts) => {
-  //opts: { 'objects':true, 'tree':true }
-
-  // Default is: return objects, do not return chuncks tree
   opts = opts || { 'objects':true, 'tree':true }
   const returnObjects = opts.objects == undefined ? true : opts.objects;
   const returnTree = opts.tree == undefined ? false : opts.tree;
@@ -174,17 +171,7 @@ const parse3ds = (buf, opts) => {
     const editorChunk = getChildChunk(rootChunk, 0x3D3D);
     const objectChunks = getChildrenChunks(editorChunk, 0x4000);
 
-    result.objects = objectChunks.map(function(objectChunk) {
-      const triMeshChunk = getChildChunk(objectChunk, 0x4100);
-      const vertexListChunk = getChildChunk(triMeshChunk, 0x4110);
-      const faceListChunk = getChildChunk(triMeshChunk, 0x4120);
-
-      return {
-        name: objectChunk.objectName,
-        vertices: unpackVertices(vertexListChunk.vertices),
-        faces: unpackFaces(faceListChunk.faces)
-      };
-    });
+    result.objects = get3TypeChunks(objectChunks);
   }
 
   if (returnTree) {
@@ -194,6 +181,23 @@ const parse3ds = (buf, opts) => {
   return result;
 };
 
+const get3TypeChunks = (objectChunk) => {
+  const triangularMesh = 0x4100;
+  const vertexList = 0x4110;
+  const faceList = 0x4120;
+
+  return objectChunks.map(function(objectChunk) {
+    const triMeshChunk = getChildChunk(objectChunk, triangularMesh);
+    const vertexListChunk = getChildChunk(triMeshChunk, vertexList);
+    const faceListChunk = getChildChunk(triMeshChunk, faceList);
+
+    return {
+      name: objectChunk.objectName,
+      vertices: unpackVertices(vertexListChunk.vertices),
+      faces: unpackFaces(faceListChunk.faces)
+    };
+  });
+}
 
 
 module.exports = {
