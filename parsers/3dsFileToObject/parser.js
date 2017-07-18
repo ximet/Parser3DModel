@@ -165,7 +165,6 @@ function unpackFaces(buf) {
 }
 
 const parse3ds = (buf, opts) => {
-  opts = opts || { 'objects':true, 'tree':true }
   const returnObjects = opts.objects == undefined ? true : opts.objects;
   const returnTree = opts.tree == undefined ? false : opts.tree;
   encoding = opts.encoding == undefined ? 'binary' : opts.encoding;
