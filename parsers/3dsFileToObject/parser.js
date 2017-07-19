@@ -10,7 +10,7 @@ const { parseObjectChunk,
         encoding  } = require('./helpers/parseHelper.js');
 
 
-function parse3ds(buffer) {
+const parse3ds = (buffer) => {
   const returnObjectsOption = true;
   const returnTreeOption = false;
 
