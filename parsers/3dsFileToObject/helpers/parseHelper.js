@@ -123,5 +123,7 @@ module.exports = {
   parseVertexListChunk,
   parseFaceListChunk,
   parseMaterialNameChunk,
-  CHUNK_PARSERS
+  CHUNK_PARSERS,
+  parseChunk,
+  encoding
 }
