@@ -164,23 +164,23 @@ function unpackFaces(buf) {
   return faces;
 }
 
-const parse3ds = (buf, opts) => {
-  const returnObjects = opts.objects == undefined ? true : opts.objects;
-  const returnTree = opts.tree == undefined ? false : opts.tree;
-  encoding = opts.encoding == undefined ? 'binary' : opts.encoding;
+const parse3ds = (buf) => {
+  const opts = { 'objects':true, 'tree':true }
+
+  encoding = 'binary';
 
   const result = {}
 
   const rootChunk = parseChunk(buf, 0);
 
-  if (returnObjects) {
+  if (opts.objects) {
     const editorChunk = getChildChunk(rootChunk, 0x3D3D);
     const objectChunks = getChildrenChunks(editorChunk, 0x4000);
 
     result.objects = get3TypeChunks(objectChunks);
   }
 
-  if (returnTree) {
+  if (opts.tree) {
     result.tree = rootChunk;
   }
 
