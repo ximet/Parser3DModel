@@ -1,4 +1,4 @@
-function get3TypeChunks (objectChunks) => {
+function get3TypeChunks (objectChunks)  {
   return objectChunks.map(function(objectChunk) {
     var triMeshChunk = getChildChunk(objectChunk, 0x4100);
     var vertexListChunk = getChildChunk(triMeshChunk, 0x4110);

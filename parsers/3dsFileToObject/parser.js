@@ -10,22 +10,19 @@ const { parseObjectChunk,
         encoding  } = require('./helpers/parseHelper.js');
 
 
-function parse3ds(buf, opts) {
-
-  // Default is: return objects, do not return chuncks tree
-  opts = opts || {}
-  var returnObjects = opts.objects == undefined ? true : opts.objects;
-  var returnTree = opts.tree == undefined ? false : opts.tree;
+function parse3ds(buffer) {
+  const returnObjectsOption = true;
+  const returnTreeOption = false;
 
   var result = {}
 
-  var rootChunk = parseChunk(buf, 0);
+  var rootChunk = parseChunk(buffer, 0);
 
-  if (returnObjects) {
+  if (returnObjectsOption) {
     result.objects = getResultChunks(rootChunk);
   }
 
-  if (returnTree) {
+  if (returnTreeOption) {
     result.tree = rootChunk;
   }
 
