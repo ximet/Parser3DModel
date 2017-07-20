@@ -11,22 +11,19 @@ const { parseObjectChunk,
 
 
 const parse3ds = (buffer) => {
-  const returnObjectsOption = true;
-  const returnTreeOption = false;
-
-  var result = {}
+  // const returnObjectsOption = true;
+  // const returnTreeOption = false;
 
   var rootChunk = parseChunk(buffer, 0);
 
-  if (returnObjectsOption) {
-    result.objects = getResultChunks(rootChunk);
-  }
+  const chunkObjects = getResultChunks(rootChunk);
+  // const treeChunk = returnTreeOption ? rootChunk : null
 
-  if (returnTreeOption) {
-    result.tree = rootChunk;
-  }
 
-  return result;
+  return {
+      chunkObjects,
+      // treeChunk
+  };
 };
 
 module.exports = {
