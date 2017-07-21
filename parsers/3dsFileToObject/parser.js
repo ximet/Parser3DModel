@@ -11,18 +11,11 @@ const { parseObjectChunk,
 
 
 const parse3ds = (buffer) => {
-  // const returnObjectsOption = true;
-  // const returnTreeOption = false;
-
-  var rootChunk = parseChunk(buffer, 0);
-
+  const rootChunk = parseChunk(buffer, 0);
   const chunkObjects = getResultChunks(rootChunk);
-  // const treeChunk = returnTreeOption ? rootChunk : null
-
 
   return {
-      chunkObjects,
-      // treeChunk
+      chunkObjects
   };
 };
 
