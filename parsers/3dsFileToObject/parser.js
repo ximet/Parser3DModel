@@ -1,13 +1,7 @@
 const { NON_LEAF_CHUNKS } = require('./enums/nonLeafChunk.js');
 const { CHUNK_NAMES } = require('./enums/chunkNames.js');
 const { getResultChunks } = require('./helpers/chunkHelper.js');
-const { parseObjectChunk,
-        parseVertexListChunk,
-        parseFaceListChunk,
-        parseMaterialNameChunk,
-        CHUNK_PARSERS,
-        parseChunk,
-        encoding  } = require('./helpers/parseHelper.js');
+const { parseChunk } = require('./helpers/parseHelper.js');
 
 
 const parse3ds = (buffer) => {

@@ -119,11 +119,5 @@ function parseChunk(buf, offset) {
 }
 
 module.exports = {
-  parseObjectChunk,
-  parseVertexListChunk,
-  parseFaceListChunk,
-  parseMaterialNameChunk,
-  CHUNK_PARSERS,
-  parseChunk,
-  encoding
+  parseChunk
 }
