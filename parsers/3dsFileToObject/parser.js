@@ -1,5 +1,3 @@
-const { NON_LEAF_CHUNKS } = require('./enums/nonLeafChunk.js');
-const { CHUNK_NAMES } = require('./enums/chunkNames.js');
 const { getResultChunks } = require('./helpers/chunkHelper.js');
 const { parseChunk } = require('./helpers/parseHelper.js');
 
