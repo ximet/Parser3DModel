@@ -9,13 +9,43 @@ const CHUNK_PARSERS = {
   0xA000: parseMaterialNameChunk
 };
 
-function parseObjectChunk(buf) {
-  const  obj= {}
-  const objectName = fromASCIIZ(buf, obj);
-  const data = buf.slice(obj.count + 1);
+function fromASCIICode(buf, obj) {
+  let count = null;
+  let i = 0;
+
+  while(buf[i] !== 0) {
+    i++;
+  }
+
+  if (obj) {
+    count = i;
+  }
 
   return {
-    objectName: objectName,
+    objectName: buf.slice(0, i).toString(encoding),
+    count
+  }
+}
+
+function parseChildren(buf) {
+  let offset = 0;
+  const children = [];
+
+  while(offset < buf.length) {
+    const chunk = parseChunk(buf, offset);
+    children.push(chunk);
+    offset += chunk.length;
+  }
+
+  return children;
+}
+
+function parseObjectChunk(buf) {
+  const { objectName, count } = fromASCIICode(buf, {});
+  const data = buf.slice(count + 1);
+
+  return {
+    objectName,
     children: parseChildren(data)
   };
 }
@@ -48,35 +78,11 @@ function parseFaceListChunk(buf) {
 }
 
 function parseMaterialNameChunk(buf) {
+  const { materialName } = fromASCIICode(buf);
+
   return {
-    materialName: fromASCIIZ(buf)
+    materialName
   };
-}
-
-function parseChildren(buf) {
-  let offset = 0;
-  const children = [];
-
-  while(offset < buf.length) {
-    const chunk = parseChunk(buf, offset);
-    children.push(chunk);
-    offset += chunk.length;
-  }
-
-  return children;
-}
-
-function fromASCIIZ(buf, obj) {
-  let i = 0;
-  while(buf[i] != 0) {
-    i++;
-  }
-
-  if (obj) {
-    obj.count = i;
-  }
-
-  return buf.slice(0, i).toString(encoding);
 }
 
 const parseChunk = (buf, offset) => {
